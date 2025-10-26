@@ -29,8 +29,8 @@ export default function LandingPage() {
     const emergencyRatio = stats.savings / stats.expenses;
     const debtToIncomeRatio = stats.debt / stats.income;
     if (emergencyRatio < 3 || debtToIncomeRatio > 0.5) return "safety";
-    if (emergencyRatio > 6 && debtToIncomeRatio < 0.3) return "aggressively";
-    return "moderately";
+    if (emergencyRatio > 6 && debtToIncomeRatio < 0.3) return "aggressive";
+    return "moderate";
   };
 
   const netWorth = (s: any) => {
