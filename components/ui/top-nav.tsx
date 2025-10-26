@@ -39,7 +39,7 @@ const defaultLinks: NavLink[] = [
   },
   {
     href: "/hysa",
-    label: "HYSA Finder",
+    label: "Savings",
     icon: <Banknote className="h-4 w-4" />,
   },
   {
