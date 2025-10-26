@@ -4,6 +4,8 @@ export const runtime = "nodejs";
 
 import { NextRequest } from "next/server";
 
+
+
 // If you have the new SDK, you can swap to `google-genai` later.
 // This works with your current dependency "@google/generative-ai": "^0.24.1"
 import { GoogleGenerativeAI } from "@google/generative-ai";

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import dynamic from "next/dynamic";
+import ChatDockClient from "@/components/chat/ChatDockClient";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,7 +26,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} antialiased`}>{children}</body>
+      <body className={`${geistSans.variable} antialiased`}>
+        {children}
+        <ChatDockClient />
+      </body>
     </html>
   );
 }

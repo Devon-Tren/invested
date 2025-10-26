@@ -1,5 +1,5 @@
 "use client";
-
+import { motion } from "framer-motion";
 import React, { useMemo, useState, useEffect, useRef } from "react";
 import {
   TrendingUp,
@@ -526,23 +526,35 @@ export default function AnalyticsPage() {
     <div className="min-h-screen bg-slate-950 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(34,197,94,0.10),transparent),radial-gradient(800px_400px_at_-10%_10%,rgba(56,189,248,0.10),transparent)] text-slate-200">
       <TopNav />
       {/* Header */}
-      <header className="px-8 py-8 border-b border-white/5">
+
+      <motion.header
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35 }}
+        className="px-8 py-8 border-b border-white/5"
+      >
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div>
-            <h1 className="pb-1 text-3xl font-extrabold tracking-tight text-slate-100">
+            <div className="flex items-center gap-2 pb-4 pt-4 text-3xl font-extrabold tracking-tight text-slate-100">
+              <TrendingUp className="mr-4 h-6.5 w-6.5" />
               Investing 101
-            </h1>
+            </div>
             <p className="text-slate-400">
               Risk-aware projections, compounding sims, and retirement planning.
             </p>
           </div>
         </div>
-      </header>
+      </motion.header>
 
       {/* Main */}
       <main className="px-8 py-10">
         {/* Top grid (clickable “mini cards”) */}
-        <div className="max-w-6xl mx-auto grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <motion.section
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, delay: 0.1 }}
+          className="max-w-6xl mx-auto grid gap-6 md:grid-cols-2 lg:grid-cols-4"
+        >
           <InfoCard
             icon={<BarChart3 className="h-5 w-5" />}
             title="Why Invest?"
@@ -575,10 +587,15 @@ export default function AnalyticsPage() {
             badge="Plan"
             onBulletClick={(b) => openModal({ title: b.label, desc: b.detail })}
           />
-        </div>
+        </motion.section>
 
         {/* Calculators & suggestions */}
-        <section className="max-w-6xl mx-auto mt-10 grid gap-6 lg:grid-cols-3">
+        <motion.section
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, delay: 0.2 }}
+          className="max-w-6xl mx-auto mt-10 grid gap-6 lg:grid-cols-3"
+        >
           {/* Compound calculator */}
           <Card className="lg:col-span-2 bg-white/5 border-white/10 lg:h-[560px] flex flex-col">
             <CardHeader className="py-4">
@@ -844,7 +861,7 @@ export default function AnalyticsPage() {
               </div>
             </CardContent>
           </Card>
-        </section>
+        </motion.section>
 
         {/* Education rows + Brokerage cards */}
         <section className="max-w-6xl mx-auto mt-10 grid gap-6 lg:grid-cols-3">
