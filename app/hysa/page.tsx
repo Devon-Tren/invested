@@ -180,18 +180,11 @@ export default function HysaPage() {
           </h1>
         </header>
 
-<<<<<<< HEAD
-  <p className="text-slate-200 max-w-3xl">
-          A High Yield Savings Account pays a much higher APY than a regular savings account.
-          Regular savings can be around 0.01 percent while HYSAs often pay 4 percent or more.
-          Use a HYSA for an emergency fund and short term goals where you want safety and quick access.
-=======
         <p className="text-slate-300 max-w-3xl">
           A High Yield Savings Account pays a much higher APY than a regular
           savings account. Regular savings can be around 0.01 percent while
           HYSAs often pay 4 percent or more. Use a HYSA for an emergency fund
           and short term goals where you want safety and quick access.
->>>>>>> 6130e545785c75f1266df75a8ca2a76cdaa02f98
         </p>
 
         <Separator className="my-6 bg-white/10" />
@@ -314,13 +307,6 @@ function DetailsModal({ row, onClose }: { row: HYSA; onClose: () => void }) {
   <p className="text-slate-200 mb-4">{row.product}</p>
         <Separator className="my-2 bg-white/10" />
         <div className="space-y-2 text-sm">
-<<<<<<< HEAD
-          <p><span className="text-slate-200">APY:</span> {(row.apy * 100).toFixed(2)}%</p>
-          <p><span className="text-slate-200">Monthly Fee:</span> ${row.monthlyFee}</p>
-          <p><span className="text-slate-200">Minimum Deposit:</span> ${row.minDeposit}</p>
-          <p><span className="text-slate-200">Transfers:</span> {row.instantTransfers ? "Instant" : "Standard"}</p>
-          <p><span className="text-slate-200">Why ranked:</span> {row.notes}</p>
-=======
           <p>
             <span className="text-slate-400">APY:</span>{" "}
             {(row.apy * 100).toFixed(2)}%
@@ -364,16 +350,12 @@ function StarBar({ value }: { value: number }) {
   return (
     <div className="flex items-center">
       {Array.from({ length: 5 }).map((_, i) => (
-<<<<<<< HEAD
-  <Star key={i} className={`h-5 w-5 ${i < value ? "text-yellow-400 fill-yellow-400" : "text-slate-300"}`} />
-=======
         <Star
           key={i}
           className={`h-5 w-5 ${
             i < value ? "text-yellow-400 fill-yellow-400" : "text-slate-600"
           }`}
         />
->>>>>>> 6130e545785c75f1266df75a8ca2a76cdaa02f98
       ))}
     </div>
   );
