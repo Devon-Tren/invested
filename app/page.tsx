@@ -38,7 +38,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(34,197,94,0.10),transparent),radial-gradient(800px_400px_at_-10%_10%,rgba(56,189,248,0.10),transparent)] text-slate-200">
+  <div className="min-h-screen bg-slate-950 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(34,197,94,0.10),transparent),radial-gradient(800px_400px_at_-10%_10%,rgba(56,189,248,0.10),transparent)] text-slate-100">
       {/* Header */}
       <header className="px-8 py-8 border-b border-white/5">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
@@ -46,7 +46,7 @@ export default function LandingPage() {
             <h1 className="pb-4 text-3xl font-extrabold tracking-tight text-slate-100">
               InvestEd
             </h1>
-            <p className="text-slate-400">
+            <p className="text-slate-200">
               Smart Student Budgeting & Investing
             </p>
           </div>
@@ -167,18 +167,18 @@ export default function LandingPage() {
                   <div className="grid gap-4 md:grid-cols-3">
                     <StatsCard
                       label="Monthly Cash Flow"
-                      value={stats?.income - stats?.expenses}
+                      value={(stats?.income ?? 0) - (stats?.expenses ?? 0)}
                       prefix="$"
-                      trend={stats?.income > stats?.expenses ? "up" : "down"}
+                      trend={(stats?.income ?? 0) > (stats?.expenses ?? 0) ? "up" : "down"}
                     />
                     <StatsCard
                       label="Emergency Fund"
-                      value={(stats?.savings / stats?.expenses).toFixed(1)}
+                      value={Number(((stats?.savings ?? 0) / (stats?.expenses ?? 1)).toFixed(1))}
                       suffix="months"
                     />
                     <StatsCard
                       label="Debt-to-Income"
-                      value={((stats?.debt / stats?.income) * 100).toFixed(1)}
+                      value={Number((((stats?.debt ?? 0) / (stats?.income ?? 1)) * 100).toFixed(1))}
                       suffix="%"
                     />
                   </div>

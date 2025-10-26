@@ -52,7 +52,7 @@ export default function HysaPage() {
           <h1 className="text-2xl font-bold tracking-tight">Smart HYSA Finder</h1>
         </header>
 
-        <p className="text-slate-300 max-w-3xl">
+  <p className="text-slate-200 max-w-3xl">
           A High Yield Savings Account pays a much higher APY than a regular savings account.
           Regular savings can be around 0.01 percent while HYSAs often pay 4 percent or more.
           Use a HYSA for an emergency fund and short term goals where you want safety and quick access.
@@ -108,7 +108,7 @@ function HysaCard({ row, stars, onSelect }: { row: HYSA; stars: number; onSelect
         <div className="mt-2 flex items-center justify-between">
           <div>
             <CardTitle className="text-lg font-semibold text-white">{row.bank}</CardTitle>
-            <CardDescription className="text-slate-300">{row.product}</CardDescription>
+            <CardDescription className="text-slate-200">{row.product}</CardDescription>
           </div>
           <StarBar value={stars} />
         </div>
@@ -134,14 +134,14 @@ function DetailsModal({ row, onClose }: { row: HYSA; onClose: () => void }) {
           <X className="h-5 w-5" />
         </button>
         <h2 className="text-xl font-bold mb-2">{row.bank}</h2>
-        <p className="text-slate-400 mb-4">{row.product}</p>
+  <p className="text-slate-200 mb-4">{row.product}</p>
         <Separator className="my-2 bg-white/10" />
         <div className="space-y-2 text-sm">
-          <p><span className="text-slate-400">APY:</span> {(row.apy * 100).toFixed(2)}%</p>
-          <p><span className="text-slate-400">Monthly Fee:</span> ${row.monthlyFee}</p>
-          <p><span className="text-slate-400">Minimum Deposit:</span> ${row.minDeposit}</p>
-          <p><span className="text-slate-400">Transfers:</span> {row.instantTransfers ? "Instant" : "Standard"}</p>
-          <p><span className="text-slate-400">Why ranked:</span> {row.notes}</p>
+          <p><span className="text-slate-200">APY:</span> {(row.apy * 100).toFixed(2)}%</p>
+          <p><span className="text-slate-200">Monthly Fee:</span> ${row.monthlyFee}</p>
+          <p><span className="text-slate-200">Minimum Deposit:</span> ${row.minDeposit}</p>
+          <p><span className="text-slate-200">Transfers:</span> {row.instantTransfers ? "Instant" : "Standard"}</p>
+          <p><span className="text-slate-200">Why ranked:</span> {row.notes}</p>
         </div>
         <div className="mt-4 text-right">
           <Button asChild>
@@ -160,7 +160,7 @@ function StarBar({ value }: { value: number }) {
   return (
     <div className="flex items-center">
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} className={`h-5 w-5 ${i < value ? "text-yellow-400 fill-yellow-400" : "text-slate-600"}`} />
+  <Star key={i} className={`h-5 w-5 ${i < value ? "text-yellow-400 fill-yellow-400" : "text-slate-300"}`} />
       ))}
     </div>
   );
