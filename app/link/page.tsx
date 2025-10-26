@@ -28,6 +28,8 @@ import { TopNav } from "@/components/ui/top-nav";
 export default function LinkYourStuffPage() {
   const router = useRouter();
   const setStatsUploaded = useStatsStore((state) => state.setStatsUploaded);
+  const storedStats = useStatsStore((s) => s.stats);
+
   const [formData, setFormData] = React.useState({
     name: "",
     income: "",
@@ -38,18 +40,36 @@ export default function LinkYourStuffPage() {
     debt: "",
   });
 
+  // Prefill from persisted store when available
+  React.useEffect(() => {
+    if (storedStats) {
+      setFormData({
+        name: (storedStats as any).name ?? "",
+        income: String((storedStats as any).income ?? ""),
+        expenses: String((storedStats as any).expenses ?? ""),
+        checking: String((storedStats as any).checking ?? ""),
+        savings: String((storedStats as any).savings ?? ""),
+        invested: String((storedStats as any).invested ?? ""),
+        debt: String((storedStats as any).debt ?? ""),
+      });
+    }
+  }, [storedStats]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Persist full object (name + balances)
     setStatsUploaded({
-      income: Number(formData.income),
-      expenses: Number(formData.expenses),
-      savings: Number(formData.savings),
-      invested: Number(formData.invested),
-      debt: Number(formData.debt),
+      name: formData.name,
+      income: Number(formData.income) || 0,
+      expenses: Number(formData.expenses) || 0,
+      checking: Number(formData.checking) || 0,
+      savings: Number(formData.savings) || 0,
+      invested: Number(formData.invested) || 0,
+      debt: Number(formData.debt) || 0,
     });
 
-    router.push("/analytics");
+    router.push("/");
   };
 
   return (
@@ -73,7 +93,7 @@ export default function LinkYourStuffPage() {
             Personalize your advice
           </h1>
           <p className="max-w-2xl text-slate-300">
-            Enter a few numbers—income, expenses, savings, investments, and
+            Enter a few numbers. Income, expenses, savings, investments, and
             debt. We'll use them to tailor your budget and learning journey.
           </p>
         </motion.div>
@@ -81,7 +101,7 @@ export default function LinkYourStuffPage() {
 
       {/* Form + Preview */}
       <section className="mx-auto mt-8 max-w-7xl px-6 pb-24">
-        <div className="grid gap-6 md:grid-cols-5">
+        <div className="gap-6 md:grid-cols-5">
           {/* Left: form */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
@@ -94,9 +114,6 @@ export default function LinkYourStuffPage() {
                 <CardTitle className="text-slate-300">
                   Tell us about your finances
                 </CardTitle>
-                <CardDescription className="text-slate-300">
-                  Manual-first. You can link accounts later for auto-updates.
-                </CardDescription>
               </CardHeader>
               <CardContent>
                 <form
@@ -204,23 +221,7 @@ export default function LinkYourStuffPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             className="md:col-span-2"
-          >
-            <Card className="rounded-2xl border-slate-800/60 bg-slate-900/60 shadow-[0_0_0_1px_rgba(15,23,42,0.5)] backdrop-blur">
-              <CardHeader>
-                <CardTitle>Personalized Advice (Preview)</CardTitle>
-                <CardDescription className="text-slate-300">
-                  This panel will render AI‑generated guidance once the form is
-                  submitted.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <SkeletonLine label="Emergency runway" />
-                <SkeletonLine label="Suggested monthly split" />
-                <SkeletonLine label="Risk band & drawdown comfort" />
-                <SkeletonLine label="Debt payoff suggestion" />
-              </CardContent>
-            </Card>
-          </motion.div>
+          ></motion.div>
         </div>
       </section>
     </div>
