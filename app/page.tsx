@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import {
   UploadCloud,
   TrendingUp,
@@ -24,20 +25,14 @@ import Link from "next/link";
 export default function LandingPage() {
   const { hasUploadedStats, stats } = useStatsStore();
 
-  // Calculate investment profile
   const getInvestmentProfile = (stats: any) => {
     const emergencyRatio = stats.savings / stats.expenses;
     const debtToIncomeRatio = stats.debt / stats.income;
-
-    if (emergencyRatio < 3 || debtToIncomeRatio > 0.5) {
-      return "safety"; // Build emergency fund first
-    } else if (emergencyRatio > 6 && debtToIncomeRatio < 0.3) {
-      return "aggressively"; // Good savings, low debt
-    }
-    return "moderately"; // Balanced approach
+    if (emergencyRatio < 3 || debtToIncomeRatio > 0.5) return "safety";
+    if (emergencyRatio > 6 && debtToIncomeRatio < 0.3) return "aggressively";
+    return "moderately";
   };
 
-  // New helpers
   const netWorth = (s: any) => {
     if (!s) return 0;
     return (
@@ -48,7 +43,12 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-slate-950 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(34,197,94,0.10),transparent),radial-gradient(800px_400px_at_-10%_10%,rgba(56,189,248,0.10),transparent)] text-slate-100">
       {/* Header */}
-      <header className="px-8 py-8 border-b border-white/5">
+      <motion.header
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35 }}
+        className="px-8 py-8 border-b border-white/5"
+      >
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div>
             <h1 className="pb-4 text-3xl font-extrabold tracking-tight text-slate-100">
@@ -76,20 +76,26 @@ export default function LandingPage() {
             </Link>
           </div>
         </div>
-      </header>
+      </motion.header>
 
       {/* Main */}
       <main className="px-8 py-10">
-        <div className="max-w-6xl mx-auto grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <motion.section
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.35 }}
+          className="max-w-6xl mx-auto grid gap-6 md:grid-cols-2 lg:grid-cols-4"
+        >
           {/* HYSA Finder */}
           <FeatureCard
             icon={<PiggyBank className="h-5 w-5" />}
             title="Best Savings Accounts"
-            description="Find top student‑friendly high‑yield savings accounts by APY, fees, and flexibility."
+            description="Find top student-friendly high-yield savings accounts by APY, fees, and flexibility."
             bullets={[
               "Live APY updates",
               "No/low fees filter",
-              "Best‑ranked badges",
+              "Best-ranked badges",
             ]}
             cta={{ href: "/hysa", label: "Explore HYSAs" }}
           />
@@ -98,7 +104,7 @@ export default function LandingPage() {
           <FeatureCard
             icon={<TrendingUp className="h-5 w-5" />}
             title="Investing 101"
-            description="Learn to invest through simulating DCA into SPY, Tech, or Crypto with risk‑adjusted projections."
+            description="Learn to invest through simulating DCA into SPY, Tech, or Crypto with risk-adjusted projections."
             bullets={[
               "What's DCA?",
               "Volatility bands",
@@ -111,10 +117,10 @@ export default function LandingPage() {
           <FeatureCard
             icon={<School className="h-5 w-5" />}
             title="Education Hub"
-            description="Still confused? Learn more through short, context‑aware lessons on key topics covered and more."
+            description="Still confused? Learn more through short, context-aware lessons on key topics covered and more."
             bullets={[
               "Simple explanations",
-              "5‑minute reads",
+              "5-minute reads",
               "In depth articles",
             ]}
             cta={{ href: "/education", label: "Start Learning" }}
@@ -132,14 +138,19 @@ export default function LandingPage() {
             ]}
             cta={{ href: "/budget", label: "Plan Budget" }}
           />
-        </div>
+        </motion.section>
 
         {/* Secondary band */}
-        <section className="max-w-6xl mx-auto mt-10">
+        <motion.section
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.35 }}
+          className="max-w-6xl mx-auto mt-10"
+        >
           <Card className="bg-white/5 border-white/10">
             <CardContent className="p-6">
               {!hasUploadedStats ? (
-                // Original CTA content
                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                   <div>
                     <h3 className="text-lg font-semibold text-white">
@@ -162,7 +173,6 @@ export default function LandingPage() {
                   </Button>
                 </div>
               ) : (
-                // Stats summary and advice
                 <div className="space-y-4">
                   <div className="flex justify-between items-start">
                     <h3 className="text-lg font-semibold text-white">
@@ -176,7 +186,6 @@ export default function LandingPage() {
                     </Badge>
                   </div>
 
-                  {/* Updated stats: keep Cash Flow, replace other two with Current Debt and Net Worth */}
                   <div className="grid gap-4 md:grid-cols-3">
                     <StatsCard
                       label="Monthly Cash Flow"
@@ -207,7 +216,7 @@ export default function LandingPage() {
               )}
             </CardContent>
           </Card>
-        </section>
+        </motion.section>
       </main>
     </div>
   );

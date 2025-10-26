@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { TopNav } from "@/components/ui/top-nav";
+import { Wallet } from "lucide-react";
 
 type Bucket = "Needs" | "Wants" | "Savings";
 
