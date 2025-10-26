@@ -111,7 +111,7 @@ export default function ChatDockClient() {
       {!open ? (
         <Button
           onClick={() => setOpen(true)}
-          className="bg-gradient-to-r from-blue-500 to-emerald-500 text-black font-semibold shadow-xl"
+          className="cursor-pointer bg-gradient-to-r from-blue-500 to-emerald-500 text-black font-semibold shadow-xl"
         >
           Ask InvestEd
         </Button>
