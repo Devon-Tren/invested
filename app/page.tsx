@@ -45,18 +45,6 @@ export default function LandingPage() {
     );
   };
 
-  const monthsToThreeMonthEF = (s: any) => {
-    if (!s) return "—";
-    const expenses = Number(s.expenses || 0);
-    const savings = Number(s.savings || 0);
-    const cashFlow = Number((s.income || 0) - (s.expenses || 0));
-    const target = 3 * expenses;
-    if (savings >= target) return 0;
-    if (cashFlow <= 0) return "∞";
-    const remaining = target - savings;
-    return Math.max(0, Math.ceil(remaining / cashFlow));
-  };
-
   return (
     <div className="min-h-screen bg-slate-950 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(34,197,94,0.10),transparent),radial-gradient(800px_400px_at_-10%_10%,rgba(56,189,248,0.10),transparent)] text-slate-200">
       {/* Header */}
@@ -93,12 +81,12 @@ export default function LandingPage() {
           {/* HYSA Finder */}
           <FeatureCard
             icon={<PiggyBank className="h-5 w-5" />}
-            title="Smart HYSA Finder"
+            title="Best Savings Accounts"
             description="Find top student‑friendly high‑yield savings accounts by APY, fees, and flexibility."
             bullets={[
               "Live APY updates",
               "No/low fees filter",
-              "Why‑ranked badges",
+              "Best‑ranked badges",
             ]}
             cta={{ href: "/hysa", label: "Explore HYSAs" }}
           />
@@ -106,12 +94,12 @@ export default function LandingPage() {
           {/* Analytics Dashboard */}
           <FeatureCard
             icon={<TrendingUp className="h-5 w-5" />}
-            title="Analytics Dashboard"
-            description="Simulate DCA into SPY, Tech, or Crypto with risk‑adjusted projections."
+            title="Investing 101"
+            description="Learn to invest through simulating DCA into SPY, Tech, or Crypto with risk‑adjusted projections."
             bullets={[
-              "CAGR & drawdown",
+              "What's DCA?",
               "Volatility bands",
-              "Scenario sliders",
+              "Best ETF's, indexes, crypto...",
             ]}
             cta={{ href: "/analytics", label: "Open Analytics" }}
           />
@@ -120,11 +108,11 @@ export default function LandingPage() {
           <FeatureCard
             icon={<School className="h-5 w-5" />}
             title="Education Hub"
-            description="Short, context‑aware lessons: emergency fund, DCA, diversification, and more."
+            description="Still confused? Learn more through short, context‑aware lessons on key topics covered and more."
             bullets={[
-              "Because‑you prompts",
+              "Simple explanations",
               "5‑minute reads",
-              "Progress tracking",
+              "In depth articles",
             ]}
             cta={{ href: "/education", label: "Start Learning" }}
           />
