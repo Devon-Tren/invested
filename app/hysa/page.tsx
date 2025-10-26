@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import { PiggyBank, Star, ExternalLink, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -170,26 +171,29 @@ export default function HysaPage() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(34,197,94,0.10),transparent),radial-gradient(800px_400px_at_-10%_10%,rgba(56,189,248,0.10),transparent)]">
       <TopNav />
+      <div className="h-6" />
+
       <div className="mx-auto max-w-7xl px-6 py-10">
-        <header className="mb-6 flex items-center gap-3">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-r from-blue-500 to-emerald-500">
-            <PiggyBank className="h-5 w-5" />
-          </span>
-          <h1 className="text-2xl font-bold tracking-tight">
+        <motion.header
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35 }}
+          className="mb-6 flex items-center gap-3"
+        >
+          <div className="flex items-center gap-2 pb-4 text-3xl font-extrabold tracking-tight text-slate-100">
+            <PiggyBank className="mr-4 h-6.5 w-6.5" />
             Smart HYSA Finder
-          </h1>
-        </header>
+          </div>
+          <h1 className="text-2xl font-bold tracking-tight"></h1>
+        </motion.header>
 
-        <p className="text-slate-300 max-w-3xl">
-          A High Yield Savings Account pays a much higher APY than a regular
-          savings account. Regular savings can be around 0.01 percent while
-          HYSAs often pay 4 percent or more. Use a HYSA for an emergency fund
-          and short term goals where you want safety and quick access.
-        </p>
-
-        <Separator className="my-6 bg-white/10" />
-
-        <section className="space-y-4">
+        <motion.section
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.35 }}
+          className="space-y-4"
+        >
           <h2 className="text-xl font-semibold">
             Best student friendly accounts
           </h2>
@@ -203,7 +207,7 @@ export default function HysaPage() {
               />
             ))}
           </div>
-        </section>
+        </motion.section>
       </div>
 
       {selected && (
@@ -299,7 +303,7 @@ function DetailsModal({ row, onClose }: { row: HYSA; onClose: () => void }) {
           <X className="h-5 w-5" />
         </button>
         <h2 className="text-xl font-bold mb-2">{row.bank}</h2>
-  <p className="text-slate-200 mb-4">{row.product}</p>
+        <p className="text-slate-200 mb-4">{row.product}</p>
         <Separator className="my-2 bg-white/10" />
         <div className="space-y-2 text-sm">
           <p>

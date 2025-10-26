@@ -3,7 +3,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils"; // replace with your own cn util if different
-import { Home, BarChart3, GraduationCap, Banknote, Link2 } from "lucide-react";
+import {
+  Home,
+  BarChart3,
+  GraduationCap,
+  Banknote,
+  Link2,
+  Wallet,
+  CircleUser, // added
+} from "lucide-react";
 import * as React from "react";
 import { useStatsStore } from "@/lib/store";
 
@@ -19,7 +27,6 @@ type TopNavProps = {
 };
 
 const defaultLinks: NavLink[] = [
-  { href: "/", label: "Home", icon: <Home className="h-4 w-4" /> },
   {
     href: "/analytics",
     label: "Analytics",
@@ -40,6 +47,7 @@ const defaultLinks: NavLink[] = [
     label: "Link Your Stats",
     icon: <Link2 className="h-4 w-4" />,
   },
+  { href: "/budget", label: "Budgeting", icon: <Wallet className="h-4 w-4" /> },
 ];
 
 export function TopNav({ links = defaultLinks, rightSlot }: TopNavProps) {
@@ -90,10 +98,19 @@ export function TopNav({ links = defaultLinks, rightSlot }: TopNavProps) {
           </ul>
         </nav>
 
-        {/* Optional right side slot (e.g., Import button / avatar) */}
-        {rightSlot ? (
-          <div className="hidden md:block ml-auto">{rightSlot}</div>
-        ) : null}
+        {/* Right: profile icon + optional rightSlot (md+) */}
+        <div className="hidden md:flex items-center gap-3 ml-auto">
+          <Link
+            href="/link"
+            aria-label="Open profile"
+            className="rounded-full p-2 text-slate-100 hover:bg-slate-800/40"
+          >
+            <CircleUser className="h-5 w-5" />
+          </Link>
+
+          {/* Optional right side slot (e.g., Import button / avatar) */}
+          {rightSlot ? <div className="ml-2">{rightSlot}</div> : null}
+        </div>
       </div>
     </header>
   );

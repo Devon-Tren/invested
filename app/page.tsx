@@ -46,7 +46,7 @@ export default function LandingPage() {
   };
 
   return (
-  <div className="min-h-screen bg-slate-950 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(34,197,94,0.10),transparent),radial-gradient(800px_400px_at_-10%_10%,rgba(56,189,248,0.10),transparent)] text-slate-100">
+    <div className="min-h-screen bg-slate-950 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(34,197,94,0.10),transparent),radial-gradient(800px_400px_at_-10%_10%,rgba(56,189,248,0.10),transparent)] text-slate-100">
       {/* Header */}
       <header className="px-8 py-8 border-b border-white/5">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
@@ -59,8 +59,11 @@ export default function LandingPage() {
             </p>
           </div>
 
-          {/* replaced large button with an icon sized to match the title */}
-          <div className="flex items-center">
+          {/* Profile section with name */}
+          <div className="flex items-center gap-3">
+            <p className="text-lg text-slate-400 pr-4 hidden md:block">
+              {(stats as any)?.name || "Set up your profile →"}
+            </p>
             <Link
               href="/link"
               aria-label="Open profile"

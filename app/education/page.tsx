@@ -16,6 +16,7 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
+import { ExternalLink } from "lucide-react";
 
 import {
   PiggyBank,
@@ -24,15 +25,15 @@ import {
   GraduationCap,
   Library,
   Zap,
+  CreditCard,
+  FileText,
+  School,
 } from "lucide-react";
 import { TopNav } from "@/components/ui/top-nav";
 
-// If you keep your landing page in a container with max-w-7xl and a dark gradient background,
-// this page mirrors that setup.
 export default function EducationPage() {
   return (
     <div className="min-h-screen w-full bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(34,197,94,0.10),transparent),radial-gradient(800px_400px_at_-10%_10%,rgba(56,189,248,0.10),transparent)] bg-slate-950 text-slate-100">
-      {/* Top nav spacer (optional) */}
       <TopNav />
       <div className="h-16" />
 
@@ -50,11 +51,11 @@ export default function EducationPage() {
           </div>
           <h1 className="text-3xl font-semibold tracking-tight md:text-5xl">
             Learn the essentials of{" "}
-            <span className="text-slate-100">budgeting</span> & {""}
+            <span className="text-slate-100">budgeting</span> &{" "}
             <span className="text-slate-100">investing</span>
           </h1>
           <p className="max-w-2xl text-slate-300">
-            Short, context‑aware lessons. Start simple, then dive deeper. Click
+            Short, context-aware lessons. Start simple, then dive deeper. Click
             any card to expand.
           </p>
         </motion.div>
@@ -63,13 +64,14 @@ export default function EducationPage() {
       {/* Content Grid */}
       <section className="mx-auto mt-8 max-w-7xl px-6 pb-24">
         <div className="grid gap-6 md:grid-cols-2">
+          {/* --- Existing Cards --- */}
           <LessonCard
             icon={<PiggyBank className="h-5 w-5" />}
             title="Emergency Fund & HYSA"
-            summary="3–6 months of expenses • Keep it in a high‑yield savings account"
+            summary="3–6 months of expenses • Keep it in a high-yield savings account"
             bullets={[
               "Why cash beats investing here",
-              "Picking a student‑friendly HYSA",
+              "Picking a student-friendly HYSA",
             ]}
           >
             <LessonAccordion
@@ -84,10 +86,11 @@ export default function EducationPage() {
                   id: "ef-2",
                   title: "Where to keep it",
                   content:
-                    "Use a no‑fee HYSA with instant transfers. Keep it separate from spending to avoid temptation.",
+                    "Use a no-fee HYSA with instant transfers. Keep it separate from spending to avoid temptation.",
                 },
               ]}
             />
+            <LearnLinks title="Emergency Fund & HYSA" />
           </LessonCard>
 
           <LessonCard
@@ -108,10 +111,11 @@ export default function EducationPage() {
                   id: "inv-2",
                   title: "What is DCA?",
                   content:
-                    "Dollar‑cost averaging means buying on a schedule regardless of price, smoothing volatility and behavior.",
+                    "Dollar-cost averaging means buying on a schedule regardless of price, smoothing volatility and behavior.",
                 },
               ]}
             />
+            <LearnLinks title="Investing 101: Index Funds & DCA" />
           </LessonCard>
 
           <LessonCard
@@ -139,15 +143,16 @@ export default function EducationPage() {
                 },
               ]}
             />
+            <LearnLinks title="Risk, Volatility & Your Profile" />
           </LessonCard>
 
           <LessonCard
             icon={<Library className="h-5 w-5" />}
             title="Accounts & Taxes: Brokerage vs Roth IRA"
-            summary="Brokerage = flexible, taxable • Roth IRA = tax‑free growth later"
+            summary="Brokerage = flexible, taxable • Roth IRA = tax-free growth later"
             bullets={[
               "Start early if you have earned income",
-              "Avoid short‑term gains when possible",
+              "Avoid short-term gains when possible",
             ]}
           >
             <LessonAccordion
@@ -156,16 +161,17 @@ export default function EducationPage() {
                   id: "acct-1",
                   title: "When to use a Roth IRA",
                   content:
-                    "If you have earned income, contributions grow tax‑free and withdrawals in retirement are tax‑free.",
+                    "If you have earned income, contributions grow tax-free and withdrawals in retirement are tax-free.",
                 },
                 {
                   id: "acct-2",
                   title: "Brokerage basics",
                   content:
-                    "Fully taxable but flexible for goals before retirement. Prefer low‑fee, broad‑market ETFs.",
+                    "Fully taxable but flexible for goals before retirement. Prefer low-fee, broad-market ETFs.",
                 },
               ]}
             />
+            <LearnLinks title="Accounts & Taxes: Brokerage vs Roth IRA" />
           </LessonCard>
 
           <LessonCard
@@ -190,10 +196,296 @@ export default function EducationPage() {
                 },
               ]}
             />
+            <LearnLinks title="Automation & Habit Building" />
+          </LessonCard>
+
+          {/* --- New Cards (Student-practical) --- */}
+
+          <LessonCard
+            icon={<CreditCard className="h-5 w-5" />}
+            title="Credit & Scores (Student Edition)"
+            summary="Build credit early, avoid fees, and monitor your reports"
+            bullets={[
+              "Utilization < 30% (ideal <10%)",
+              "Pay in full + on time",
+            ]}
+          >
+            <LessonAccordion
+              items={[
+                {
+                  id: "cred-1",
+                  title: "Start simple",
+                  content:
+                    "A no-annual-fee student card or secured card used for small recurring bills, paid in full every month, builds history safely.",
+                },
+                {
+                  id: "cred-2",
+                  title: "Protect your score",
+                  content:
+                    "Keep utilization low, avoid late payments, and check your credit reports at least yearly for errors.",
+                },
+              ]}
+            />
+            <LearnLinks title="Credit & Scores (Student Edition)" />
+          </LessonCard>
+
+          <LessonCard
+            icon={<FileText className="h-5 w-5" />}
+            title="Paychecks, W-4 & Taxes"
+            summary="Understand pay stubs, withholding, and how to avoid big surprises"
+            bullets={[
+              "Use the IRS Withholding Estimator",
+              "Know FICA vs federal/state taxes",
+            ]}
+          >
+            <LessonAccordion
+              items={[
+                {
+                  id: "tax-1",
+                  title: "Dial in your W-4",
+                  content:
+                    "Update your W-4 when jobs change. Proper withholding reduces the chance of a big bill or over-withholding.",
+                },
+                {
+                  id: "tax-2",
+                  title: "Read your pay stub",
+                  content:
+                    "Track gross, net, pre-tax benefits, and FICA. Confirm hours, rate, and deductions are correct.",
+                },
+              ]}
+            />
+            <LearnLinks title="Paychecks, W-4 & Taxes" />
+          </LessonCard>
+
+          <LessonCard
+            icon={<School className="h-5 w-5" />}
+            title="Student Loans & Aid"
+            summary="Borrow last, not first • Know interest, grace periods, and repayment"
+            bullets={[
+              "Complete FAFSA early",
+              "Use the Loan Simulator before borrowing",
+            ]}
+          >
+            <LessonAccordion
+              items={[
+                {
+                  id: "loan-1",
+                  title: "Borrow smart",
+                  content:
+                    "Prioritize grants/scholarships/work-study. If borrowing, understand subsidized vs unsubsidized, interest accrual, and fees.",
+                },
+                {
+                  id: "loan-2",
+                  title: "Repayment options",
+                  content:
+                    "Know IDR plans, consolidation, and servicer tools. Avoid missed payments that can damage credit.",
+                },
+              ]}
+            />
+            <LearnLinks title="Student Loans & Aid" />
           </LessonCard>
         </div>
       </section>
     </div>
+  );
+}
+
+/** Map lesson titles to 3 high-quality learning links (primary + 2 extras). */
+function getLearnLinks(title: string): { url: string; label: string }[] | null {
+  const t = title.toLowerCase();
+
+  if (t.includes("emergency") || t.includes("hysa")) {
+    return [
+      {
+        url: "https://www.nerdwallet.com/article/banking/how-much-should-i-have-in-emergency-fund",
+        label: "NerdWallet: How large should an emergency fund be?",
+      },
+      {
+        url: "https://www.consumerfinance.gov/consumer-tools/educator-tools/resources-for-older-adults/managing-your-money/building-your-savings/",
+        label: "CFPB: Building your savings (emergency funds)",
+      },
+      {
+        url: "https://www.fdic.gov/resources/deposit-insurance/",
+        label: "FDIC: Deposit insurance basics",
+      },
+    ];
+  }
+
+  if (t.includes("index") || t.includes("dca") || t.includes("investing")) {
+    return [
+      {
+        url: "https://www.vanguard.com/what-is-index-investing",
+        label: "Vanguard: Index investing basics",
+      },
+      {
+        url: "https://www.investor.gov/additional-resources/spotlight/index-funds",
+        label: "Investor.gov: What to know about index funds",
+      },
+      {
+        url: "https://www.investor.gov/introduction-investing/investing-basics/how-invest/dollar-cost-averaging",
+        label: "Investor.gov: Dollar-cost averaging explained",
+      },
+    ];
+  }
+
+  if (t.includes("risk") || t.includes("volatility")) {
+    return [
+      {
+        url: "https://www.investopedia.com/terms/v/volatility.asp",
+        label: "Investopedia: Volatility & risk",
+      },
+      {
+        url: "https://www.investor.gov/introduction-investing/investing-basics/risk-tolerance",
+        label: "Investor.gov: Assessing your risk tolerance",
+      },
+      {
+        url: "https://investor.vanguard.com/investor-resources-education/article/market-declines",
+        label: "Vanguard: Putting market declines in perspective",
+      },
+    ];
+  }
+
+  if (t.includes("accounts") || t.includes("roth")) {
+    return [
+      {
+        url: "https://www.irs.gov/retirement-plans/roth-iras",
+        label: "IRS: Roth IRA basics",
+      },
+      {
+        url: "https://www.irs.gov/publications/p590a",
+        label: "IRS Pub 590-A: Roth IRA contributions",
+      },
+      {
+        url: "https://www.investor.gov/introduction-investing/investing-basics/investment-products",
+        label: "Investor.gov: Investment accounts & products",
+      },
+    ];
+  }
+
+  if (t.includes("automation") || t.includes("habit")) {
+    return [
+      {
+        url: "https://jamesclear.com/habit",
+        label: "James Clear: Habit formation (practical guide)",
+      },
+      {
+        url: "https://www.consumerfinance.gov/consumer-tools/bank-accounts/savings-accounts/",
+        label: "CFPB: Automate saving with the right account",
+      },
+      {
+        url: "https://www.consumer.gov/articles/1002-making-budget",
+        label: "Consumer.gov: Making a budget (50/30/20 starter)",
+      },
+    ];
+  }
+
+  if (t.includes("credit")) {
+    return [
+      {
+        url: "https://www.consumerfinance.gov/consumer-tools/credit-reports-and-scores/",
+        label: "CFPB: Credit reports & scores",
+      },
+      {
+        url: "https://www.annualcreditreport.com/",
+        label: "AnnualCreditReport.com: Free reports",
+      },
+      {
+        url: "https://www.myfico.com/credit-education/credit-scores",
+        label: "FICO: How credit scores work",
+      },
+    ];
+  }
+
+  if (
+    t.includes("w-4") ||
+    t.includes("w-4") ||
+    t.includes("paycheck") ||
+    t.includes("taxes")
+  ) {
+    return [
+      {
+        url: "https://www.irs.gov/individuals/tax-withholding-estimator",
+        label: "IRS: Tax Withholding Estimator",
+      },
+      {
+        url: "https://www.irs.gov/forms-pubs/about-form-w-4",
+        label: "IRS: About Form W-4",
+      },
+      {
+        url: "https://www.investopedia.com/terms/p/pay-stub.asp",
+        label: "Investopedia: Understanding your pay stub",
+      },
+    ];
+  }
+
+  if (
+    t.includes("student loan") ||
+    t.includes("aid") ||
+    t.includes("fafta") ||
+    t.includes("fafsa")
+  ) {
+    return [
+      {
+        url: "https://studentaid.gov/",
+        label: "Federal Student Aid: Official site",
+      },
+      {
+        url: "https://studentaid.gov/aid-estimator/",
+        label: "FSA: Aid Estimator (FAFSA)",
+      },
+      {
+        url: "https://studentaid.gov/loan-simulator/",
+        label: "FSA: Loan Simulator",
+      },
+    ];
+  }
+
+  // Fallback
+  return [
+    {
+      url: "https://www.investopedia.com/",
+      label: "Investopedia: Personal finance resources",
+    },
+    {
+      url: "https://www.consumerfinance.gov/",
+      label: "CFPB: Money tools & guides",
+    },
+    {
+      url: "https://www.investor.gov/",
+      label: "Investor.gov: SEC investor education",
+    },
+  ];
+}
+
+/** Renders a compact list of external links for a lesson (primary + 2 extras). */
+function LearnLinks({ title }: { title: string }) {
+  const links = getLearnLinks(title);
+  if (!links || links.length === 0) return null;
+
+  return (
+    <details className="mt-3">
+      <summary className="cursor-pointer text-sm text-emerald-200 hover:text-emerald-100">
+        Learn more?
+      </summary>
+      <div className="mt-2 space-y-2">
+        {links.map((l) => (
+          <div
+            key={l.url}
+            className="flex items-center gap-2 text-sm text-slate-300"
+          >
+            <ExternalLink className="h-4 w-4 text-emerald-300" />
+            <a
+              href={l.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-emerald-300 hover:underline"
+            >
+              {l.label}
+            </a>
+          </div>
+        ))}
+      </div>
+    </details>
   );
 }
 
@@ -240,6 +532,7 @@ function LessonCard({
             ))}
           </ul>
           {children}
+          {/* Link block now rendered by <LearnLinks /> in each card */}
         </CardContent>
       </Card>
     </motion.div>
