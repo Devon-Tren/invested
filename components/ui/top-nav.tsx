@@ -56,7 +56,7 @@ export function TopNav({ links = defaultLinks, rightSlot }: TopNavProps) {
         {/* Brand (replace with your logo) */}
         <Link
           href="/"
-          className="select-none text-lg font-semibold tracking-tight text-slate-100"
+          className="select-none text-lg font-semibold tracking-tight text-white"
         >
           InvestEd
         </Link>
@@ -75,9 +75,9 @@ export function TopNav({ links = defaultLinks, rightSlot }: TopNavProps) {
                   <Link
                     href={href}
                     className={cn(
-                      "group flex flex-1 items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm text-slate-300",
-                      "transition-colors hover:text-slate-100 hover:bg-slate-800/40",
-                      active && "text-slate-100 bg-slate-800/60"
+                      "group flex flex-1 items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm text-slate-100",
+                      "transition-colors hover:text-white hover:bg-slate-800/40",
+                      active && "text-white bg-slate-800/60"
                     )}
                     aria-current={active ? "page" : undefined}
                   >

@@ -58,7 +58,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(34,197,94,0.10),transparent),radial-gradient(800px_400px_at_-10%_10%,rgba(56,189,248,0.10),transparent)] text-slate-200">
+  <div className="min-h-screen bg-slate-950 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(34,197,94,0.10),transparent),radial-gradient(800px_400px_at_-10%_10%,rgba(56,189,248,0.10),transparent)] text-slate-100">
       {/* Header */}
       <header className="px-8 py-8 border-b border-white/5">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
@@ -66,7 +66,7 @@ export default function LandingPage() {
             <h1 className="pb-4 text-3xl font-extrabold tracking-tight text-slate-100">
               InvestEd
             </h1>
-            <p className="text-slate-400">
+            <p className="text-slate-200">
               Smart Student Budgeting & Investing
             </p>
           </div>

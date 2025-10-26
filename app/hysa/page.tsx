@@ -299,7 +299,7 @@ function DetailsModal({ row, onClose }: { row: HYSA; onClose: () => void }) {
           <X className="h-5 w-5" />
         </button>
         <h2 className="text-xl font-bold mb-2">{row.bank}</h2>
-        <p className="text-slate-400 mb-4">{row.product}</p>
+  <p className="text-slate-200 mb-4">{row.product}</p>
         <Separator className="my-2 bg-white/10" />
         <div className="space-y-2 text-sm">
           <p>
