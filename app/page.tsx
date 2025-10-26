@@ -1,9 +1,10 @@
+"use client";
 import {
   UploadCloud,
   TrendingUp,
   School,
   PiggyBank,
-  Link as LinkIcon,
+  Wallet,
 } from "lucide-react";
 import {
   Card,
@@ -16,8 +17,24 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { useStatsStore } from "@/lib/store";
 
 export default function LandingPage() {
+  const { hasUploadedStats, stats } = useStatsStore();
+
+  // Calculate investment profile
+  const getInvestmentProfile = (stats: any) => {
+    const emergencyRatio = stats.savings / stats.expenses;
+    const debtToIncomeRatio = stats.debt / stats.income;
+
+    if (emergencyRatio < 3 || debtToIncomeRatio > 0.5) {
+      return "safety"; // Build emergency fund first
+    } else if (emergencyRatio > 6 && debtToIncomeRatio < 0.3) {
+      return "aggressively"; // Good savings, low debt
+    }
+    return "moderately"; // Balanced approach
+  };
+
   return (
     <div className="min-h-screen bg-slate-950 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(34,197,94,0.10),transparent),radial-gradient(800px_400px_at_-10%_10%,rgba(56,189,248,0.10),transparent)] text-slate-200">
       {/* Header */}
@@ -79,46 +96,116 @@ export default function LandingPage() {
             cta={{ href: "/education", label: "Start Learning" }}
           />
 
-          {/* Link Your Stats */}
+          {/* Student Budgeting */}
           <FeatureCard
-            icon={<LinkIcon className="h-5 w-5" />}
-            title="Link Your Stats"
-            description="Upload statements or connect your bank to compute investable cash & buffer."
+            icon={<Wallet className="h-5 w-5" />}
+            title="Student Budgeting"
+            description="Plan your spending with our student-focused 50/30/20 budget calculator and expense tracker."
             bullets={[
-              "PDF/CSV upload",
-              "Auto categorization",
-              "Investable /mo",
+              "Flexible ratios",
+              "Category insights",
+              "Auto-adjusting goals",
             ]}
-            cta={{ href: "/import", label: "Link / Upload" }}
+            cta={{ href: "/budget", label: "Plan Budget" }}
           />
         </div>
 
         {/* Secondary band */}
         <section className="max-w-6xl mx-auto mt-10">
           <Card className="bg-white/5 border-white/10">
-            <CardContent className="p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-              <div>
-                <h3 className="text-lg font-semibold text-white">
-                  Your next best step
-                </h3>
-                <p className="text-sm text-slate-400 mt-1">
-                  Finish onboarding by importing your latest statement so we can
-                  estimate your emergency buffer and monthly investable amount.
-                </p>
-              </div>
-              <Button
-                asChild
-                className="bg-gradient-to-r from-blue-500 to-emerald-500 text-white"
-              >
-                <a href="/import">
-                  <UploadCloud className="mr-2 h-4 w-4" />
-                  Get Started
-                </a>
-              </Button>
+            <CardContent className="p-6">
+              {!hasUploadedStats ? (
+                // Original CTA content
+                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                  <div>
+                    <h3 className="text-lg font-semibold text-white">
+                      Your next best step
+                    </h3>
+                    <p className="text-sm text-slate-400 mt-1">
+                      Finish onboarding by importing your latest statement so we
+                      can estimate your emergency buffer and monthly investable
+                      amount.
+                    </p>
+                  </div>
+                  <Button
+                    asChild
+                    className="bg-gradient-to-r from-blue-500 to-emerald-500 text-white"
+                  >
+                    <a href="/import">
+                      <UploadCloud className="mr-2 h-4 w-4" />
+                      Get Started
+                    </a>
+                  </Button>
+                </div>
+              ) : (
+                // Stats summary and advice
+                <div className="space-y-4">
+                  <div className="flex justify-between items-start">
+                    <h3 className="text-lg font-semibold text-white">
+                      Your Financial Summary
+                    </h3>
+                    <Badge
+                      variant="secondary"
+                      className="bg-emerald-500/10 text-emerald-200"
+                    >
+                      {getInvestmentProfile(stats)} investor
+                    </Badge>
+                  </div>
+                  <div className="grid gap-4 md:grid-cols-3">
+                    <StatsCard
+                      label="Monthly Cash Flow"
+                      value={stats?.income - stats?.expenses}
+                      prefix="$"
+                      trend={stats?.income > stats?.expenses ? "up" : "down"}
+                    />
+                    <StatsCard
+                      label="Emergency Fund"
+                      value={(stats?.savings / stats?.expenses).toFixed(1)}
+                      suffix="months"
+                    />
+                    <StatsCard
+                      label="Debt-to-Income"
+                      value={((stats?.debt / stats?.income) * 100).toFixed(1)}
+                      suffix="%"
+                    />
+                  </div>
+                </div>
+              )}
             </CardContent>
           </Card>
         </section>
       </main>
+    </div>
+  );
+}
+
+function StatsCard({
+  label,
+  value,
+  prefix = "",
+  suffix = "",
+  trend,
+}: {
+  label: string;
+  value: number;
+  prefix?: string;
+  suffix?: string;
+  trend?: "up" | "down";
+}) {
+  const trendColor = trend === "up" ? "text-emerald-400" : "text-red-400";
+
+  return (
+    <div className="rounded-xl bg-slate-800/50 p-4">
+      <div className="text-sm text-slate-400">{label}</div>
+      <div
+        className={`text-xl font-semibold mt-1 ${
+          trend ? trendColor : "text-white"
+        }`}
+      >
+        {prefix}
+        {Math.abs(value)}
+        {suffix}
+      </div>
     </div>
   );
 }
