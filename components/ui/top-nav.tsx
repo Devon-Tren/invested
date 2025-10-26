@@ -29,7 +29,7 @@ type TopNavProps = {
 const defaultLinks: NavLink[] = [
   {
     href: "/analytics",
-    label: "Analytics",
+    label: "Investing",
     icon: <BarChart3 className="h-4 w-4" />,
   },
   {

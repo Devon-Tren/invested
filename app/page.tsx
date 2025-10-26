@@ -110,7 +110,7 @@ export default function LandingPage() {
               "Volatility bands",
               "Best ETF's, indexes, crypto...",
             ]}
-            cta={{ href: "/analytics", label: "Open Analytics" }}
+            cta={{ href: "/analytics", label: "Learn about Investing " }}
           />
 
           {/* Education Hub */}
