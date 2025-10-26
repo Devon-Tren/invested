@@ -68,10 +68,10 @@ export default function EducationPage() {
           <LessonCard
             icon={<PiggyBank className="h-5 w-5" />}
             title="Emergency Fund & HYSA"
-            summary="3–6 months of expenses • Keep it in a high-yield savings account"
+            summary="3–6 months of expenses • Keep it in a high-yield savings account (HYSA)"
             bullets={[
-              "Why cash beats investing here",
-              "Picking a student-friendly HYSA",
+              "Saving beats investing for emergencies (less risk)",
+              "Pick a FDIC-insured HYSA with a high APY",
             ]}
           >
             <LessonAccordion

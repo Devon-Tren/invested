@@ -85,7 +85,7 @@ export default function LandingPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.35 }}
-          className="max-w-6xl mx-auto grid gap-6 md:grid-cols-2 lg:grid-cols-4"
+          className="max-w-6xl mx-auto grid gap-6 md:grid-cols-2 lg:grid-cols-4 auto-rows-fr"
         >
           {/* HYSA Finder */}
           <FeatureCard
@@ -275,7 +275,7 @@ function FeatureCard({
   badge?: string;
 }) {
   return (
-    <Card className="bg-white/5 border-white/10 hover:border-white/20 transition-colors">
+    <Card className="h-full flex flex-col bg-white/5 border-white/10 hover:border-white/20 transition-colors">
       <CardHeader className="space-y-2">
         <div className="flex items-center gap-2 text-slate-300">
           <span className="inline-grid place-items-center rounded-md size-7 bg-white/10 text-slate-100">
@@ -292,7 +292,7 @@ function FeatureCard({
           {description}
         </CardDescription>
       </CardHeader>
-      <CardContent className="text-sm text-slate-300">
+      <CardContent className="text-sm text-slate-300 flex-1">
         <ul className="space-y-2">
           {bullets.map((b) => (
             <li key={b} className="flex items-start gap-2">
@@ -303,7 +303,7 @@ function FeatureCard({
         </ul>
       </CardContent>
       <Separator className="bg-white/10" />
-      <CardFooter className="p-4">
+      <CardFooter className="p-4 mt-auto">
         <Button asChild variant="secondary" className="w-full">
           <a href={cta.href}>{cta.label}</a>
         </Button>
