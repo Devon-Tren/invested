@@ -37,6 +37,26 @@ export default function LandingPage() {
     return "moderately"; // Balanced approach
   };
 
+  // New helpers
+  const netWorth = (s: any) => {
+    if (!s) return 0;
+    return (
+      Number(s.savings || 0) + Number(s.invested || 0) - Number(s.debt || 0)
+    );
+  };
+
+  const monthsToThreeMonthEF = (s: any) => {
+    if (!s) return "—";
+    const expenses = Number(s.expenses || 0);
+    const savings = Number(s.savings || 0);
+    const cashFlow = Number((s.income || 0) - (s.expenses || 0));
+    const target = 3 * expenses;
+    if (savings >= target) return 0;
+    if (cashFlow <= 0) return "∞";
+    const remaining = target - savings;
+    return Math.max(0, Math.ceil(remaining / cashFlow));
+  };
+
   return (
   <div className="min-h-screen bg-slate-950 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(34,197,94,0.10),transparent),radial-gradient(800px_400px_at_-10%_10%,rgba(56,189,248,0.10),transparent)] text-slate-100">
       {/* Header */}
@@ -54,7 +74,7 @@ export default function LandingPage() {
           {/* replaced large button with an icon sized to match the title */}
           <div className="flex items-center">
             <Link
-              href="/profile"
+              href="/link"
               aria-label="Open profile"
               className="inline-flex"
             >
@@ -164,9 +184,12 @@ export default function LandingPage() {
                       {getInvestmentProfile(stats)} investor
                     </Badge>
                   </div>
+
+                  {/* Updated stats: keep Cash Flow, replace other two with Current Debt and Net Worth */}
                   <div className="grid gap-4 md:grid-cols-3">
                     <StatsCard
                       label="Monthly Cash Flow"
+<<<<<<< HEAD
                       value={(stats?.income ?? 0) - (stats?.expenses ?? 0)}
                       prefix="$"
                       trend={(stats?.income ?? 0) > (stats?.expenses ?? 0) ? "up" : "down"}
@@ -180,6 +203,29 @@ export default function LandingPage() {
                       label="Debt-to-Income"
                       value={Number((((stats?.debt ?? 0) / (stats?.income ?? 1)) * 100).toFixed(1))}
                       suffix="%"
+=======
+                      value={
+                        Number(stats?.income || 0) -
+                        Number(stats?.expenses || 0)
+                      }
+                      prefix="$"
+                      trend={
+                        Number(stats?.income || 0) >
+                        Number(stats?.expenses || 0)
+                          ? "up"
+                          : "down"
+                      }
+                    />
+                    <StatsCard
+                      label="Current debt"
+                      value={Number(stats?.debt || 0)}
+                      prefix="$"
+                    />
+                    <StatsCard
+                      label="Net worth"
+                      value={netWorth(stats)}
+                      prefix="$"
+>>>>>>> 6130e545785c75f1266df75a8ca2a76cdaa02f98
                     />
                   </div>
                 </div>
@@ -200,12 +246,18 @@ function StatsCard({
   trend,
 }: {
   label: string;
-  value: number;
+  value: number | string;
   prefix?: string;
   suffix?: string;
   trend?: "up" | "down";
 }) {
   const trendColor = trend === "up" ? "text-emerald-400" : "text-red-400";
+  const display =
+    typeof value === "number"
+      ? Number.isInteger(value)
+        ? String(value)
+        : Number(value).toLocaleString()
+      : String(value);
 
   return (
     <div className="rounded-xl bg-slate-800/50 p-4">
@@ -216,7 +268,7 @@ function StatsCard({
         }`}
       >
         {prefix}
-        {Math.abs(value)}
+        {display}
         {suffix}
       </div>
     </div>
