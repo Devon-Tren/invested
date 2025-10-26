@@ -258,17 +258,12 @@ function HysaCard({
         </div>
         <div className="mt-2 flex items-center justify-between">
           <div>
-<<<<<<< HEAD
-            <CardTitle className="text-lg font-semibold text-white">{row.bank}</CardTitle>
-            <CardDescription className="text-slate-200">{row.product}</CardDescription>
-=======
             <CardTitle className="text-lg font-semibold text-white">
               {row.bank}
             </CardTitle>
             <CardDescription className="text-slate-300">
               {row.product}
             </CardDescription>
->>>>>>> 6130e545785c75f1266df75a8ca2a76cdaa02f98
           </div>
           <StarBar value={stars} />
         </div>
@@ -326,7 +321,6 @@ function DetailsModal({ row, onClose }: { row: HYSA; onClose: () => void }) {
           <p>
             <span className="text-slate-400">Why ranked:</span> {row.notes}
           </p>
->>>>>>> 6130e545785c75f1266df75a8ca2a76cdaa02f98
         </div>
         <div className="mt-4 text-right">
           <Button asChild>

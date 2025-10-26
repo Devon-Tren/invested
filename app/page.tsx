@@ -189,21 +189,6 @@ export default function LandingPage() {
                   <div className="grid gap-4 md:grid-cols-3">
                     <StatsCard
                       label="Monthly Cash Flow"
-<<<<<<< HEAD
-                      value={(stats?.income ?? 0) - (stats?.expenses ?? 0)}
-                      prefix="$"
-                      trend={(stats?.income ?? 0) > (stats?.expenses ?? 0) ? "up" : "down"}
-                    />
-                    <StatsCard
-                      label="Emergency Fund"
-                      value={Number(((stats?.savings ?? 0) / (stats?.expenses ?? 1)).toFixed(1))}
-                      suffix="months"
-                    />
-                    <StatsCard
-                      label="Debt-to-Income"
-                      value={Number((((stats?.debt ?? 0) / (stats?.income ?? 1)) * 100).toFixed(1))}
-                      suffix="%"
-=======
                       value={
                         Number(stats?.income || 0) -
                         Number(stats?.expenses || 0)
@@ -225,7 +210,6 @@ export default function LandingPage() {
                       label="Net worth"
                       value={netWorth(stats)}
                       prefix="$"
->>>>>>> 6130e545785c75f1266df75a8ca2a76cdaa02f98
                     />
                   </div>
                 </div>
