@@ -5,6 +5,7 @@ import {
   School,
   PiggyBank,
   Wallet,
+  CircleUser,
 } from "lucide-react";
 import {
   Card,
@@ -18,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { useStatsStore } from "@/lib/store";
+import Link from "next/link";
 
 export default function LandingPage() {
   const { hasUploadedStats, stats } = useStatsStore();
@@ -48,9 +50,20 @@ export default function LandingPage() {
               Smart Student Budgeting & Investing
             </p>
           </div>
-          <Button className="bg-gradient-to-r from-blue-500 to-emerald-500 text-white">
-            <UploadCloud className="mr-2 h-4 w-4" /> Import Bank Data
-          </Button>
+
+          {/* replaced large button with an icon sized to match the title */}
+          <div className="flex items-center">
+            <Link
+              href="/profile"
+              aria-label="Open profile"
+              className="inline-flex"
+            >
+              <CircleUser
+                className="h-8 w-8 md:h-10 md:w-10 lg:h-12 lg:w-12 text-slate-100"
+                aria-hidden
+              />
+            </Link>
+          </div>
         </div>
       </header>
 
@@ -131,7 +144,7 @@ export default function LandingPage() {
                     asChild
                     className="bg-gradient-to-r from-blue-500 to-emerald-500 text-white"
                   >
-                    <a href="/import">
+                    <a href="/link">
                       <UploadCloud className="mr-2 h-4 w-4" />
                       Get Started
                     </a>

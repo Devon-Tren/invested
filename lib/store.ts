@@ -2,8 +2,10 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 interface UserStats {
+  name?: string
   income?: number
   expenses?: number
+  checking?: number
   savings?: number
   invested?: number
   debt?: number
